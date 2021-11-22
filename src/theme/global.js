@@ -4,7 +4,8 @@ const global = {
   body: {
     fontSize: '16px',
     fontFamily: 'body',
-    bg: 'white',
+    bg: '#141C2C',
+    bgImage: 'images/confetti-doodles.svg',
   },
 }
 

@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 
 import { Box, Button, Flex, Heading, VStack } from '@chakra-ui/react'
+import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
+
+import abi from '../utils/WavePortal.json'
 
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+
+  const contractAddress = '0x896AC5575CA8d4f302deE31D08c74D16657863c3'
+  const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -51,6 +57,38 @@ export default function Home() {
     }
   }
 
+  const wave = async () => {
+    try {
+      const { ethereum } = window
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const waveContractPortal = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        )
+
+        let count = await waveContractPortal.getTotalWaves()
+        console.log('Retrieved total wave count...', count.toNumber())
+
+        const waveTxn = await waveContractPortal.wave()
+        console.log('Mining...', waveTxn.hash)
+
+        await waveTxn.wait()
+        console.log('Mined --', waveTxn.hash)
+
+        count = await waveContractPortal.getTotalWaves()
+        console.log('Retrieved total wave count...', count.toNumber())
+      } else {
+        console.log("Ethereum object doesn't exist!")
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     const onLoad = async () => {
       setIsLoading(true)
@@ -67,18 +105,27 @@ export default function Home() {
 
       <Flex
         role="main"
-        bg="white"
         direction="column"
         align="center"
         justify="center"
         py="12"
         px="6"
+        bg="white"
+        w="full"
+        maxW="540px"
+        mx="auto"
+        mt="10"
+        rounded="2xl"
       >
-        <Heading as="h1">Wave Portal 👋</Heading>
+        <Heading as="h1">
+          Wave Portal <span>👋</span>
+        </Heading>
         <VStack>
-          <Button colorScheme="blue" size="lg" mt="8">
+          <Button colorScheme="blue" size="lg" mt="8" onClick={wave}>
             Wave at me
           </Button>
+
+          <Button>Get total waves by sender</Button>
 
           {!currentAccount && !isLoading && (
             <Button onClick={connectWallet}>Connect Wallet</Button>
