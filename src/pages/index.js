@@ -160,6 +160,9 @@ export default function Home() {
 
           {allWaves.length !== 0 && (
             <VStack>
+              <Heading fontFamily="body" fontSize="20">
+                Waves log
+              </Heading>
               {allWaves.map((wave, index) => (
                 <Box key={index}>
                   <Text wordBreak="break-all">Address: {wave.address}</Text>

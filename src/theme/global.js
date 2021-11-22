@@ -6,6 +6,7 @@ const global = {
     fontFamily: 'body',
     bg: '#141C2C',
     bgImage: 'images/confetti-doodles.svg',
+    bgPos: 'center',
   },
 }
 
