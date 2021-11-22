@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Button, Flex, Heading, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text, VStack } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
 import Image from 'next/image'
@@ -10,8 +10,9 @@ import abi from '../utils/WavePortal.json'
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [allWaves, setAllWaves] = useState([])
 
-  const contractAddress = '0x896AC5575CA8d4f302deE31D08c74D16657863c3'
+  const contractAddress = '0x49331A9745E3cDd860e473b80701faC2Fc9107f3'
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
@@ -31,6 +32,7 @@ export default function Home() {
         const account = accounts[0]
         console.log('Found an authorized account: ', account)
         setCurrentAccount(account)
+        getAllWaves()
       } else {
         console.log('No authorized account found.')
       }
@@ -73,7 +75,7 @@ export default function Home() {
         let count = await waveContractPortal.getTotalWaves()
         console.log('Retrieved total wave count...', count.toNumber())
 
-        const waveTxn = await waveContractPortal.wave()
+        const waveTxn = await waveContractPortal.wave('Hello boi')
         console.log('Mining...', waveTxn.hash)
 
         await waveTxn.wait()
@@ -89,6 +91,37 @@ export default function Home() {
     }
   }
 
+  const getAllWaves = async () => {
+    try {
+      const { ethereum } = window
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner()
+        const waveContractPortal = new ethers.Contract(
+          contractAddress,
+          contractABI,
+          signer
+        )
+
+        const waves = await waveContractPortal.getAllWaves()
+
+        let wavesCleaned = []
+
+        waves.forEach((wave) => {
+          wavesCleaned.push({
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message,
+          })
+        })
+        setAllWaves(wavesCleaned)
+      }
+    } catch (error) {
+      console.log("Ethereum object doesn't exist!")
+    }
+  }
+
   useEffect(() => {
     const onLoad = async () => {
       setIsLoading(true)
@@ -99,7 +132,7 @@ export default function Home() {
   }, [])
 
   return (
-    <Box>
+    <Box px="4">
       {/* Edit the Head info */}
       <NextSeo title="Home" description="Description" />
 
@@ -109,23 +142,33 @@ export default function Home() {
         align="center"
         justify="center"
         py="12"
-        px="6"
+        px="4"
         bg="white"
         w="full"
         maxW="540px"
         mx="auto"
         mt="10"
-        rounded="2xl"
+        rounded="md"
       >
         <Heading as="h1">
           Wave Portal <span>👋</span>
         </Heading>
         <VStack>
-          <Button colorScheme="blue" size="lg" mt="8" onClick={wave}>
+          <Button colorScheme="blue" size="lg" mt="8" onClick={wave} mb="8">
             Wave at me
           </Button>
 
-          <Button>Get total waves by sender</Button>
+          {allWaves.length !== 0 && (
+            <VStack>
+              {allWaves.map((wave, index) => (
+                <Box key={index}>
+                  <Text wordBreak="break-all">Address: {wave.address}</Text>
+                  <Text>Time: {wave.timestamp.toString()}</Text>
+                  <Text>Message: {wave.message}</Text>
+                </Box>
+              ))}
+            </VStack>
+          )}
 
           {!currentAccount && !isLoading && (
             <Button onClick={connectWallet}>Connect Wallet</Button>
