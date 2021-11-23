@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/dist/client/router'
 
 import Footer from '../components/Footer'
 import Form from '../components/Form'
@@ -10,9 +11,10 @@ import WavesContainer from '../components/WavesContainer'
 import abi from '../utils/WavePortal.json'
 
 export default function Home() {
-  const [currentAccount, setCurrentAccount] = useState('')
+  const [currentAccount, setCurrentAccount] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [allWaves, setAllWaves] = useState([])
+  const [networkName, setNetworkName] = useState(null)
 
   const contractAddress = '0x376a669aB91BE0Df88E11486f1afD008a42918e9'
   const contractABI = abi.abi
@@ -61,7 +63,7 @@ export default function Home() {
     }
   }
 
-  const wave = async () => {
+  const wave = async (message) => {
     try {
       const { ethereum } = window
 
@@ -77,7 +79,7 @@ export default function Home() {
         let count = await waveContractPortal.getTotalWaves()
         console.log('Retrieved total wave count...', count.toNumber())
 
-        const waveTxn = await waveContractPortal.wave('Hello boi', {
+        const waveTxn = await waveContractPortal.wave(message, {
           gasLimit: 300000,
         })
         console.log('Mining...', waveTxn.hash)
@@ -101,25 +103,33 @@ export default function Home() {
 
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum)
-        const signer = provider.getSigner()
-        const waveContractPortal = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        )
+        const network = await provider.getNetwork()
+        setNetworkName(network.name)
 
-        const waves = await waveContractPortal.getAllWaves()
+        if (network.name === 'rinkeby') {
+          const signer = provider.getSigner()
+          const waveContract = new ethers.Contract(
+            contractAddress,
+            contractABI,
+            signer
+          )
 
-        let wavesCleaned = []
+          const waves = await waveContract.getAllWaves()
 
-        waves.forEach((wave) => {
-          wavesCleaned.push({
-            address: wave.waver,
-            timestamp: new Date(wave.timestamp * 1000),
-            message: wave.message,
+          let wavesCleaned = []
+
+          waves.forEach((wave) => {
+            wavesCleaned.push({
+              address: wave.waver,
+              timestamp: new Date(wave.timestamp * 1000),
+              message: wave.message,
+            })
           })
-        })
-        setAllWaves(wavesCleaned)
+          setAllWaves(wavesCleaned)
+        } else {
+          console.warn('Switch your network for rinkeby')
+          setNetworkName(network.name)
+        }
       }
     } catch (error) {
       console.log("Ethereum object doesn't exist!")
@@ -174,6 +184,21 @@ export default function Home() {
     import('@lottiefiles/lottie-player')
   })
 
+  const router = useRouter()
+  useEffect(() => {
+    const { ethereum } = window
+
+    if (ethereum) {
+      ethereum.on('chainChanged', () => {
+        router.reload(window.location.pathname)
+      })
+
+      ethereum.on('accountsChanged', () => {
+        router.reload(window.location.pathname)
+      })
+    }
+  }, [router])
+
   return (
     <Box px="4" mb="16">
       {/* Edit the Head info */}
@@ -224,7 +249,9 @@ export default function Home() {
               </Button>
             )}
 
-            {currentAccount && !isLoading && <Form />}
+            {currentAccount && networkName === 'rinkeby' && !isLoading && (
+              <Form onWave={wave} />
+            )}
           </Box>
         </Flex>
 

@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
-const Form = () => {
+const Form = ({ onWave }) => {
   const {
     handleSubmit,
     register,
@@ -16,11 +16,9 @@ const Form = () => {
 
   function onSubmit(values) {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values.message.trim(), null, 2))
-        resolve()
-        reset()
-      }, 3000)
+      onWave(values.message)
+      resolve()
+      reset()
     })
   }
 
@@ -42,8 +40,10 @@ const Form = () => {
         mt={4}
         color="white"
         isLoading={isSubmitting}
+        loadingText="Sending..."
         type="submit"
-        variant="pinkGradient"
+        colorScheme="pink"
+        _focus={{ bg: 'red' }}
       >
         Wave at me 👋
       </Button>
