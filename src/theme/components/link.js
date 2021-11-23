@@ -3,6 +3,7 @@ import { sharedBaseStyle, light, dark } from './sharedStyleLinkButton'
 const link = {
   baseStyle: {
     ...sharedBaseStyle,
+    textDecoration: 'underline',
     _hover: {
       // textDecoration: 'none',
     },

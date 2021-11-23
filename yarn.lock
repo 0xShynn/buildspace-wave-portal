@@ -1101,11 +1101,6 @@
     "@ethersproject/properties" "^5.5.0"
     "@ethersproject/strings" "^5.5.0"
 
-"@fontsource/outfit@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/outfit/-/outfit-4.5.0.tgz#3e262007bbe58192f0e30896145578898f148716"
-  integrity sha512-H2Z8Z8WNKl4DkDlwjOTGJsPM8SueXjSmAXHP2Ex6NEXcz/TtZ2pWkcKbT2K6BV2V16a0ZeddM/X3cFOnm+br9Q==
-
 "@fontsource/rubik@^4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@fontsource/rubik/-/rubik-4.5.0.tgz#e6e86606903d7102c565eec4b1339298308c3acb"
@@ -1414,6 +1409,11 @@
   dependencies:
     "@typescript-eslint/types" "4.30.0"
     eslint-visitor-keys "^2.0.0"
+
+"@yaireo/relative-time@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@yaireo/relative-time/-/relative-time-1.0.1.tgz#a2f25b2c44b654d7dbec94e5fdd5044a6cb01095"
+  integrity sha512-18Q2wOQiDVwTWtJGNZHi3ec+9gO1YFbExnpGzCXg/R0OHdUH9/HwSDHWFthFuRPhpWdo9QO0l0shj1REHcnumA==
 
 acorn-jsx@^5.3.1:
   version "5.3.2"
@@ -4020,6 +4020,11 @@ react-hook-form@^7.20.2:
   version "7.20.2"
   resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.20.2.tgz#6fe76b680dd54ceb95c9c1a3c6338162081ba2e2"
   integrity sha512-J5zkZW0Mf3KuMlk7Tl1tWYXoSjYhfKyEu//NfWTn2xzvv2vnDT5/EE/vHgtNb7kVeYpx6/mHIBd9aOfNnWcOsg==
+
+react-icons@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.3.1.tgz#2fa92aebbbc71f43d2db2ed1aed07361124e91ca"
+  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
 react-is@17.0.2:
   version "17.0.2"

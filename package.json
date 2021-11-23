@@ -18,6 +18,7 @@
     "@fontsource/yellowtail": "^4.5.0",
     "@hookform/resolvers": "^2.8.3",
     "@lottiefiles/lottie-player": "^1.4.5",
+    "@yaireo/relative-time": "^1.0.1",
     "ethers": "^5.5.1",
     "framer-motion": "^4",
     "next": "12",
@@ -36,7 +37,8 @@
     "husky": "^7.0.2",
     "lint-staged": ">=10",
     "prettier": "^2.3.2",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-icons": "^4.3.1"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint --cache --fix",

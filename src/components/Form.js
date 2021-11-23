@@ -10,21 +10,23 @@ const Form = () => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm()
 
   function onSubmit(values) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        alert(JSON.stringify(values, null, 2))
+        alert(JSON.stringify(values.message.trim(), null, 2))
         resolve()
+        reset()
       }, 3000)
     })
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl mb="4">
+      <FormControl mb="4" mt="8">
         <Textarea
           id="message"
           placeholder="Your message <3"

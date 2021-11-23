@@ -9,7 +9,7 @@ const greenGradientColor =
 const button = {
   baseStyle: {
     ...sharedBaseStyle,
-    rounded: 'none',
+    rounded: 'sm',
   },
   sizes: {
     sm: {},
@@ -32,6 +32,9 @@ const button = {
         bg: pinkGradientColor,
       },
       _loading: {
+        bg: pinkGradientColor,
+      },
+      _disabled: {
         bg: pinkGradientColor,
       },
     },

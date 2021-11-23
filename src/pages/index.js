@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { Box, Button, Flex, Heading, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
 
@@ -175,7 +175,7 @@ export default function Home() {
   })
 
   return (
-    <Box px="4">
+    <Box px="4" mb="16">
       {/* Edit the Head info */}
       <NextSeo title="Home" description="Description" />
 
@@ -189,13 +189,7 @@ export default function Home() {
         mx="auto"
         mt="10"
       >
-        <Flex
-          textAlign="center"
-          align="center"
-          direction="column"
-          mb="16"
-          rounded="sm"
-        >
+        <Flex textAlign="center" align="center" direction="column" rounded="sm">
           <lottie-player
             ref={ref}
             autoplay
@@ -212,29 +206,25 @@ export default function Home() {
             color="blue.900"
           >
             <Heading fontFamily="body" mb="4">
-              Hi there! ✨
+              Hello world! ✨
             </Heading>
-            <Text fontWeight="bold" mb={{ base: 6, md: 12 }}>
+            <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="540px">
               I&apos;m Antonin, a front-end developer who recently started his
               Web3 journey 🚀 Connect your Wallet and send me a lil&apos;
               message 🤗 wagmi
             </Text>
 
-            {currentAccount && !isLoading && (
+            {!currentAccount && !isLoading && (
               <Button
                 onClick={connectWallet}
-                variant="greenGradient"
+                variant="pinkGradient"
                 color="white"
-                mb="8"
               >
                 Connect Wallet
               </Button>
             )}
 
-            <Form />
-            {/* <Button colorScheme="blue" size="lg" mt="8" onClick={wave} mb="8">
-              Wave at me 👋
-            </Button> */}
+            {currentAccount && !isLoading && <Form />}
           </Box>
         </Flex>
 

@@ -1,16 +1,40 @@
-import { Box, Heading, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, Heading, Icon, Text, VStack } from '@chakra-ui/react'
+import RelativeTime from '@yaireo/relative-time'
+import { IoTime } from 'react-icons/io5'
 
 const WavesContainer = ({ data }) => {
+  const relativeTime = new RelativeTime()
+
+  const sortedData = data.sort((a, b) => b.timestamp - a.timestamp)
+
   return (
-    <VStack bg="blue.100" w="full" p="12">
-      <Heading fontFamily="body" fontSize="20">
-        Waves log
+    <VStack mt="16" spacing="4">
+      <Heading fontFamily="body" color="white" mb="4" textAlign="center">
+        Thank you 💛
       </Heading>
-      {data.map((wave, index) => (
-        <Box key={index}>
-          <Text wordBreak="break-all">Address: {wave.address}</Text>
-          <Text>Time: {wave.timestamp.toString()}</Text>
-          <Text>Message: {wave.message}</Text>
+      {sortedData.map((wave, index) => (
+        <Box
+          key={index}
+          bg="gray.100"
+          rounded="sm"
+          color="gray.600"
+          overflow="hidden"
+        >
+          <Box px="5" py="3">
+            <Flex align="center">
+              <Icon as={IoTime} boxSize="14px" mb="0.5" />
+              <Text fontSize="14px" ml="1">
+                {relativeTime.from(wave.timestamp)}
+              </Text>
+            </Flex>
+            <Text color="gray.600" fontSize="16px" wordBreak="break-all">
+              From {wave.address}
+            </Text>
+          </Box>
+
+          <Box bg="white" p="5">
+            <Text fontWeight="medium">{wave.message}</Text>
+          </Box>
         </Box>
       ))}
     </VStack>
