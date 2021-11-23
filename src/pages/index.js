@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Box, Button, Flex, Heading, Text, VStack } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
-import Image from 'next/image'
 
+import Footer from '../components/Footer'
+import Form from '../components/Form'
+import WavesContainer from '../components/WavesContainer'
 import abi from '../utils/WavePortal.json'
 
 export default function Home() {
@@ -167,6 +169,11 @@ export default function Home() {
     onLoad()
   }, [])
 
+  const ref = useRef(null)
+  useEffect(() => {
+    import('@lottiefiles/lottie-player')
+  })
+
   return (
     <Box px="4">
       {/* Edit the Head info */}
@@ -177,63 +184,64 @@ export default function Home() {
         direction="column"
         align="center"
         justify="center"
-        py="12"
-        px="4"
-        bg="white"
         w="full"
-        maxW="540px"
+        maxW="740px"
         mx="auto"
         mt="10"
-        rounded="md"
       >
-        <Heading as="h1">
-          Wave Portal <span>👋</span>
-        </Heading>
-        <VStack>
-          <Button colorScheme="blue" size="lg" mt="8" onClick={wave} mb="8">
-            Wave at me
-          </Button>
+        <Flex
+          textAlign="center"
+          align="center"
+          direction="column"
+          mb="16"
+          rounded="sm"
+        >
+          <lottie-player
+            ref={ref}
+            autoplay
+            loop
+            mode="normal"
+            src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
+            style={{ width: '320px', height: '320px' }}
+          />
+          <Box
+            bg="white"
+            rounded="sm"
+            p={{ base: 6, md: 12 }}
+            mt="8"
+            color="blue.900"
+          >
+            <Heading fontFamily="body" mb="4">
+              Hi there! ✨
+            </Heading>
+            <Text fontWeight="bold" mb={{ base: 6, md: 12 }}>
+              I&apos;m Antonin, a front-end developer who recently started his
+              Web3 journey 🚀 Connect your Wallet and send me a lil&apos;
+              message 🤗 wagmi
+            </Text>
 
-          {allWaves.length !== 0 && (
-            <VStack>
-              <Heading fontFamily="body" fontSize="20">
-                Waves log
-              </Heading>
-              {allWaves.map((wave, index) => (
-                <Box key={index}>
-                  <Text wordBreak="break-all">Address: {wave.address}</Text>
-                  <Text>Time: {wave.timestamp.toString()}</Text>
-                  <Text>Message: {wave.message}</Text>
-                </Box>
-              ))}
-            </VStack>
-          )}
+            {currentAccount && !isLoading && (
+              <Button
+                onClick={connectWallet}
+                variant="greenGradient"
+                color="white"
+                mb="8"
+              >
+                Connect Wallet
+              </Button>
+            )}
 
-          {!currentAccount && !isLoading && (
-            <Button onClick={connectWallet}>Connect Wallet</Button>
-          )}
-        </VStack>
+            <Form />
+            {/* <Button colorScheme="blue" size="lg" mt="8" onClick={wave} mb="8">
+              Wave at me 👋
+            </Button> */}
+          </Box>
+        </Flex>
+
+        {allWaves.length !== 0 && <WavesContainer data={allWaves} />}
       </Flex>
 
-      <Box role="contentinfo">
-        <Flex justify="center" p="6">
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{' '}
-            <span>
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                width={72}
-                height={16}
-              />
-            </span>
-          </a>
-        </Flex>
-      </Box>
+      <Footer />
     </Box>
   )
 }
