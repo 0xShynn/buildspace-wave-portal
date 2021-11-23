@@ -2,7 +2,7 @@
 const fonts = {
   // add fonts from https://fontsource.org
   heading: 'yellowtail, sans-serif',
-  body: 'sans-serif',
+  body: 'rubik, sans-serif',
 }
 
 export default fonts

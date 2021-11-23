@@ -5,6 +5,7 @@ import SEO from '../../next-seo.config'
 import overrides from '../theme/index'
 
 import '@fontsource/yellowtail'
+import '@fontsource/rubik'
 
 function MyApp({ Component, pageProps }) {
   return (
