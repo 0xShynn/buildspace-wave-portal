@@ -7,7 +7,9 @@ import {
   Button,
   Flex,
   Heading,
+  Link,
   Text,
+  useToast,
 } from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
@@ -21,11 +23,27 @@ import abi from '../utils/WavePortal.json'
 export default function Home() {
   const [currentAccount, setCurrentAccount] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [allWaves, setAllWaves] = useState([])
   const [networkName, setNetworkName] = useState(null)
+  const [error, setError] = useState(null)
+  const [miningState, setMiningState] = useState(null)
+  const [allWaves, setAllWaves] = useState([])
 
   const contractAddress = '0x376a669aB91BE0Df88E11486f1afD008a42918e9'
   const contractABI = abi.abi
+
+  const toast = useToast()
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: `Error ${error.code}`,
+        description: error.message,
+        position: 'top-right',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      })
+    }
+  }, [error, toast])
 
   const checkIfWalletIsConnected = async () => {
     try {
@@ -90,18 +108,33 @@ export default function Home() {
         const waveTxn = await waveContractPortal.wave(message, {
           gasLimit: 300000,
         })
+        setMiningState('isMining')
         console.log('Mining...', waveTxn.hash)
 
         await waveTxn.wait()
+        setMiningState('isMined')
         console.log('Mined --', waveTxn.hash)
 
         count = await waveContractPortal.getTotalWaves()
         console.log('Retrieved total wave count...', count.toNumber())
+        setTimeout(() => {
+          setMiningState(null)
+        }, 5000)
       } else {
         console.log("Ethereum object doesn't exist!")
       }
     } catch (error) {
-      console.log(error)
+      console.warn('wesh', error)
+      setMiningState(null)
+
+      if (error.code === 'CALL_EXCEPTION') {
+        setError({
+          code: 'Transaction Failed',
+          message: 'You need to wait 15mn before sending another wave.',
+        })
+      } else {
+        setError({ code: error.code, message: error.message })
+      }
     }
   }
 
@@ -193,17 +226,29 @@ export default function Home() {
   })
 
   const router = useRouter()
+
   useEffect(() => {
     const { ethereum } = window
 
     if (ethereum) {
+      // Reload the page if the network has changed.
       ethereum.on('chainChanged', () => {
         router.reload(window.location.pathname)
       })
 
-      ethereum.on('accountsChanged', () => {
-        router.reload(window.location.pathname)
-      })
+      return () => {
+        ethereum.off('chainChanged')
+      }
+    }
+  }, [router])
+
+  useEffect(() => {
+    // Reload the page if the account has changed.
+    ethereum.on('accountsChanged', () => {
+      router.reload(window.location.pathname)
+    })
+    return () => {
+      ethereum.off('accountsChanged')
     }
   }, [router])
 
@@ -244,9 +289,10 @@ export default function Home() {
               Hello world! ✨
             </Heading>
             <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="540px">
-              I&apos;m Antonin, a front-end developer who recently started his
-              Web3 journey. Connect your wallet on the Ethereum Rinkeby Network
-              and send me a lil&apos; message 🤗 wagmi
+              I&apos;m <Link href="https://twitter.com/anhek_">Antonin</Link>, a
+              front-end developer who recently started his Web3 journey. Connect
+              your wallet on the Ethereum Rinkeby Network and send me a message
+              🤗 wagmi
             </Text>
 
             {networkName !== 'rinkeby' && networkName !== null && (
@@ -269,7 +315,7 @@ export default function Home() {
             )}
 
             {currentAccount && networkName === 'rinkeby' && !isLoading && (
-              <Form onWave={wave} />
+              <Form onWave={wave} miningState={miningState} />
             )}
           </Flex>
         </Flex>

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Box,
   Button,
@@ -7,7 +9,8 @@ import {
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
-const Form = ({ onWave }) => {
+const Form = ({ onWave, miningState }) => {
+  const [formIsSent, setFormIsSent] = useState(false)
   const {
     handleSubmit,
     register,
@@ -15,12 +18,26 @@ const Form = ({ onWave }) => {
     formState: { errors, isSubmitting },
   } = useForm()
 
-  function onSubmit(values) {
-    return new Promise((resolve) => {
-      onWave(values.message)
-      resolve()
-      reset()
-    })
+  async function onSubmit(values) {
+    // return new Promise((resolve, reject) => {
+    //   setFormIsSent(true)
+    //   onWave(values.message)
+    //   resolve().then(reset())
+    //   reject(() => {
+    //     setFormIsSent(false)
+    //   })
+    // })
+
+    setFormIsSent(true)
+    await onWave(values.message)
+      .then(() => {
+        setFormIsSent(false)
+        reset()
+      })
+      .catch((error) => {
+        console.log(error)
+        setFormIsSent(false)
+      })
   }
 
   return (
@@ -29,10 +46,11 @@ const Form = ({ onWave }) => {
         <FormControl mb="4">
           <Textarea
             id="message"
-            placeholder="Your message :)"
+            placeholder="gm"
             {...register('message', { required: 'This is required' })}
             minH="140px"
             bg="gray.50"
+            disabled={formIsSent}
           />
           <FormErrorMessage>
             {errors.message && errors.message.message}
@@ -42,10 +60,9 @@ const Form = ({ onWave }) => {
           mt={4}
           color="white"
           isLoading={isSubmitting}
-          loadingText="Sending..."
+          loadingText="Mining..."
           type="submit"
           colorScheme="pink"
-          _focus={{ bg: 'red' }}
         >
           Wave at me 👋
         </Button>

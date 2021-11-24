@@ -8,8 +8,8 @@ const WavesContainer = ({ data }) => {
   const sortedData = data.sort((a, b) => b.timestamp - a.timestamp)
 
   return (
-    <VStack mt="16" spacing="4">
-      <Heading fontFamily="body" color="white" mb="4" textAlign="center">
+    <VStack mt="16" spacing="8">
+      <Heading fontFamily="body" color="white" textAlign="center">
         Thank you 💛
       </Heading>
       {sortedData.map((wave, index) => (
@@ -20,19 +20,23 @@ const WavesContainer = ({ data }) => {
           color="gray.600"
           overflow="hidden"
         >
-          <Box px="5" py="3">
+          <Box px={{ base: 3, md: 5 }} py="3">
             <Flex align="center">
               <Icon as={IoTime} boxSize="14px" mb="0.5" />
               <Text fontSize="14px" ml="1">
                 {relativeTime.from(wave.timestamp)}
               </Text>
             </Flex>
-            <Text color="gray.600" fontSize="16px" wordBreak="break-all">
+            <Text
+              color="gray.600"
+              fontSize={{ base: '14px', md: '16px' }}
+              wordBreak="break-all"
+            >
               From {wave.address}
             </Text>
           </Box>
 
-          <Box bg="white" p="5">
+          <Box bg="white" p={{ base: 3, md: 5 }}>
             <Text fontWeight="medium">{wave.message}</Text>
           </Box>
         </Box>
