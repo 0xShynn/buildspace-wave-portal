@@ -320,7 +320,9 @@ export default function Home() {
           </Flex>
         </Flex>
 
-        {allWaves.length !== 0 && <WavesContainer data={allWaves} />}
+        {allWaves.length !== 0 && (
+          <WavesContainer data={allWaves} currentAccount={currentAccount} />
+        )}
       </Flex>
 
       <Footer />

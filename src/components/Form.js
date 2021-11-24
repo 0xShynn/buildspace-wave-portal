@@ -46,7 +46,7 @@ const Form = ({ onWave, miningState }) => {
         <FormControl mb="4">
           <Textarea
             id="message"
-            placeholder="gm"
+            placeholder="Your message || favorite quote || gm || wagmi || hello world"
             {...register('message', { required: 'This is required' })}
             minH="140px"
             bg="gray.50"

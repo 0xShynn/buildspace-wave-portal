@@ -18,7 +18,6 @@
     "@fontsource/yellowtail": "^4.5.0",
     "@hookform/resolvers": "^2.8.3",
     "@lottiefiles/lottie-player": "^1.4.5",
-    "@yaireo/relative-time": "^1.0.1",
     "ethers": "^5.5.1",
     "framer-motion": "^4",
     "next": "12",
