@@ -17,6 +17,7 @@ import { useRouter } from 'next/dist/client/router'
 
 import Footer from '../components/Footer'
 import Form from '../components/Form'
+import Nenderoidos from '../components/Nenderoidos'
 import WavesContainer from '../components/WavesContainer'
 import abi from '../utils/WavePortal.json'
 
@@ -228,27 +229,30 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(() => {
-    const { ethereum } = window
-
     if (ethereum) {
       // Reload the page if the network has changed.
       ethereum.on('chainChanged', () => {
         router.reload(window.location.pathname)
       })
 
-      return () => {
-        ethereum.off('chainChanged')
-      }
+      // return () => {
+      //   ethereum.off('chainChanged')
+      // }
     }
   }, [router])
 
   useEffect(() => {
-    // Reload the page if the account has changed.
-    ethereum.on('accountsChanged', () => {
-      router.reload(window.location.pathname)
-    })
-    return () => {
-      ethereum.off('accountsChanged')
+    const { ethereum } = window
+
+    if (ethereum) {
+      // Reload the page if the account has changed.
+      ethereum.on('accountsChanged', () => {
+        router.reload(window.location.pathname)
+      })
+
+      // return () => {
+      //   ethereum.off('accountsChanged')
+      // }
     }
   }, [router])
 
@@ -284,7 +288,17 @@ export default function Home() {
             color="blue.900"
             direction="column"
             align="center"
+            pos="relative"
           >
+            <Box
+              w={{ base: '100px', md: '120px' }}
+              h={{ base: '100px', md: '120px' }}
+              bg="#5B87FF"
+              rounded="full"
+              mb="6"
+            >
+              <Nenderoidos />
+            </Box>
             <Heading fontFamily="body" mb="4">
               Hello world! ✨
             </Heading>
