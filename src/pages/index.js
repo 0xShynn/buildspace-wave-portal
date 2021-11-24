@@ -1,6 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Text,
+} from '@chakra-ui/react'
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/dist/client/router'
@@ -223,21 +231,32 @@ export default function Home() {
             src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
             style={{ width: '320px', height: '320px' }}
           />
-          <Box
+          <Flex
             bg="white"
             rounded="sm"
             p={{ base: 6, md: 12 }}
             mt="8"
             color="blue.900"
+            direction="column"
+            align="center"
           >
             <Heading fontFamily="body" mb="4">
               Hello world! ✨
             </Heading>
             <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="540px">
               I&apos;m Antonin, a front-end developer who recently started his
-              Web3 journey 🚀 Connect your Wallet and send me a lil&apos;
-              message 🤗 wagmi
+              Web3 journey. Connect your wallet on the Ethereum Rinkeby Network
+              and send me a lil&apos; message 🤗 wagmi
             </Text>
+
+            {networkName !== 'rinkeby' && networkName !== null && (
+              <Alert status="warning" fontSize="16px">
+                <AlertIcon />
+                Your wallet is connected to{' '}
+                {networkName[0].toUpperCase() + networkName.slice(1)}, please
+                switch to Rinkeby.
+              </Alert>
+            )}
 
             {!currentAccount && !isLoading && (
               <Button
@@ -252,7 +271,7 @@ export default function Home() {
             {currentAccount && networkName === 'rinkeby' && !isLoading && (
               <Form onWave={wave} />
             )}
-          </Box>
+          </Flex>
         </Flex>
 
         {allWaves.length !== 0 && <WavesContainer data={allWaves} />}

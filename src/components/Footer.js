@@ -8,7 +8,7 @@ const Footer = () => {
       <Flex justify="center" p="6" textAlign="center">
         <Text color="white" fontSize="16px">
           🦄{' '}
-          <chakra.span fontWeight="bold" ml="2">
+          <chakra.span fontWeight="bold" ml="1">
             <Link
               href={BUILDSPACE_URL}
               target="_blank"

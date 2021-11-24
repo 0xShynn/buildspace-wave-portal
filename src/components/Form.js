@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   FormControl,
   FormErrorMessage,
@@ -23,31 +24,33 @@ const Form = ({ onWave }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl mb="4" mt="8">
-        <Textarea
-          id="message"
-          placeholder="Your message <3"
-          {...register('message', { required: 'This is required' })}
-          minH="140px"
-          bg="gray.50"
-        />
-        <FormErrorMessage>
-          {errors.message && errors.message.message}
-        </FormErrorMessage>
-      </FormControl>
-      <Button
-        mt={4}
-        color="white"
-        isLoading={isSubmitting}
-        loadingText="Sending..."
-        type="submit"
-        colorScheme="pink"
-        _focus={{ bg: 'red' }}
-      >
-        Wave at me 👋
-      </Button>
-    </form>
+    <Box w="full">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormControl mb="4">
+          <Textarea
+            id="message"
+            placeholder="Your message <3"
+            {...register('message', { required: 'This is required' })}
+            minH="140px"
+            bg="gray.50"
+          />
+          <FormErrorMessage>
+            {errors.message && errors.message.message}
+          </FormErrorMessage>
+        </FormControl>
+        <Button
+          mt={4}
+          color="white"
+          isLoading={isSubmitting}
+          loadingText="Sending..."
+          type="submit"
+          colorScheme="pink"
+          _focus={{ bg: 'red' }}
+        >
+          Wave at me 👋
+        </Button>
+      </form>
+    </Box>
   )
 }
 
