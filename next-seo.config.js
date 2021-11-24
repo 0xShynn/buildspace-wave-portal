@@ -4,7 +4,7 @@
 const canonicalUrl = ''
 
 // Edit the default title
-const defaultTitle = 'WAGMI'
+const defaultTitle = 'wagmi'
 const defaultDescription = 'A Web3 buildspace project'
 
 // Edit the SEO parameters
@@ -38,14 +38,14 @@ export const SEO = {
       rel: 'mask-icon',
       href: 'favicons/safari-pinned-tab.svg',
       // Edit the touch bar background color
-      color: '#81e6d9',
+      color: '#D53F8C',
     },
   ],
   additionalMetaTags: [
     {
       name: 'msapplication-TileColor',
       // Edit the tile color (windows)
-      content: '#81e6d9',
+      content: '#D53F8C',
     },
     {
       name: 'theme-color',

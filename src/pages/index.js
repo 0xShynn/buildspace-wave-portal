@@ -267,7 +267,7 @@ export default function Home() {
         mx="auto"
         mt="10"
       >
-        <Flex textAlign="center" align="center" direction="column" rounded="sm">
+        <Flex textAlign="center" align="center" direction="column" rounded="xl">
           <lottie-player
             ref={ref}
             autoplay
@@ -278,7 +278,7 @@ export default function Home() {
           />
           <Flex
             bg="white"
-            rounded="sm"
+            rounded="xl"
             p={{ base: 6, md: 12 }}
             mt="8"
             color="blue.900"
@@ -289,10 +289,13 @@ export default function Home() {
               Hello world! ✨
             </Heading>
             <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="540px">
-              I&apos;m <Link href="https://twitter.com/anhek_">Antonin</Link>, a
-              front-end developer who recently started his Web3 journey. Connect
-              your wallet on the Ethereum Rinkeby Network and send me a message
-              🤗 wagmi
+              I&apos;m{' '}
+              <Link href="https://twitter.com/anhek_" target="_blank">
+                Antonin
+              </Link>
+              , a front-end developer who recently started his Web3 journey.
+              Connect your wallet on the Ethereum Rinkeby Network and send me a
+              message 🤗 wagmi
             </Text>
 
             {networkName !== 'rinkeby' && networkName !== null && (

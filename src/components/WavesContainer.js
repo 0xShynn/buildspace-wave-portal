@@ -17,7 +17,7 @@ const WavesContainer = ({ data, currentAccount }) => {
           <Box
             key={index}
             bg={selected ? 'pink.100' : 'gray.100'}
-            rounded="sm"
+            rounded="xl"
             color="gray.600"
             overflow="hidden"
           >
