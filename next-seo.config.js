@@ -4,13 +4,13 @@
 const canonicalUrl = ''
 
 // Edit the default title
-const defaultTitle = 'Default title'
-const defaultDescription = 'Default description'
+const defaultTitle = 'WAGMI'
+const defaultDescription = 'A Web3 buildspace project'
 
 // Edit the SEO parameters
 export const SEO = {
   defaultTitle: defaultTitle,
-  titleTemplate: `${defaultTitle} | %s`,
+  titleTemplate: `${defaultTitle}`,
   canonical: canonicalUrl,
   additionalLinkTags: [
     {
@@ -62,7 +62,7 @@ export const SEO = {
     images: [
       {
         // Add your custom image for sharing
-        url: 'https://via.placeholder.com/1200x630',
+        url: 'https://www.dropbox.com/s/sdcj5oavzhxayhh/web3-ap-ogimage.jpg?raw=1',
         width: 1200,
         height: 630,
         alt: 'Preview of the website',
@@ -71,8 +71,7 @@ export const SEO = {
   },
   // Edit the twitter info or delete
   twitter: {
-    handle: '@handle',
-    site: '@site',
+    handle: '@anhek_',
     cardType: 'summary_large_image',
   },
 }

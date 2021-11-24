@@ -29,7 +29,7 @@ const Form = ({ onWave }) => {
         <FormControl mb="4">
           <Textarea
             id="message"
-            placeholder="Your message <3"
+            placeholder="Your message :)"
             {...register('message', { required: 'This is required' })}
             minH="140px"
             bg="gray.50"
