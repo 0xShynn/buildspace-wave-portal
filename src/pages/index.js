@@ -229,6 +229,8 @@ export default function Home() {
   const router = useRouter()
 
   useEffect(() => {
+    const { ethereum } = window
+
     if (ethereum) {
       // Reload the page if the network has changed.
       ethereum.on('chainChanged', () => {
