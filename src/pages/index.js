@@ -7,6 +7,7 @@ import {
   Button,
   Flex,
   Heading,
+  Icon,
   Link,
   Text,
   useToast,
@@ -14,6 +15,7 @@ import {
 import { ethers } from 'ethers'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/dist/client/router'
+import { IoLogoTwitter } from 'react-icons/io5'
 
 import Footer from '../components/Footer'
 import Form from '../components/Form'
@@ -29,7 +31,7 @@ export default function Home() {
   const [miningState, setMiningState] = useState(null)
   const [allWaves, setAllWaves] = useState([])
 
-  const contractAddress = '0xaA839187288B19Ea0c3f1EAeACf958838e8cB217'
+  const contractAddress = '0x5dc6f8c3Ea66d08aA092A8faf2D3D9D3a29bd1Ad'
   const contractABI = abi.abi
 
   const toast = useToast()
@@ -269,7 +271,7 @@ export default function Home() {
         align="center"
         justify="center"
         w="full"
-        maxW="740px"
+        maxW="840px"
         mx="auto"
       >
         <Flex textAlign="center" align="center" direction="column">
@@ -304,9 +306,20 @@ export default function Home() {
             <Heading fontFamily="body" mb="4">
               Hello world! ✨
             </Heading>
-            <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="540px">
+            <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="600px">
               I&apos;m{' '}
-              <Link href="https://twitter.com/anhek_" target="_blank">
+              <Link
+                href="https://twitter.com/anhek_"
+                target="_blank"
+                bg="#1D9BF0"
+                color="white"
+                px="2"
+                py="0.5"
+                rounded="md"
+                textDecoration="none"
+                _hover={{ bg: 'blue.200', transition: '0.5s' }}
+              >
+                <Icon as={IoLogoTwitter} boxSize="16px" mb="1" mr="0.5" />
                 Antonin
               </Link>
               , a front-end developer who recently started his Web3 journey.
@@ -338,14 +351,13 @@ export default function Home() {
             {currentAccount && networkName === 'rinkeby' && !isLoading && (
               <>
                 <Text
-                  bg="blue.100"
                   fontSize="15px"
                   fontWeight="medium"
                   textTransform="capitalize"
                   mb="2"
                   px="1"
                   rounded="md"
-                  textColor="blue.700"
+                  textColor="blue.600"
                   wordBreak="break-all"
                 >
                   Connected account: {currentAccount}

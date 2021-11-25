@@ -62,7 +62,7 @@ export const SEO = {
     images: [
       {
         // Add your custom image for sharing
-        url: 'https://www.dropbox.com/s/sdcj5oavzhxayhh/web3-ap-ogimage.jpg?raw=1',
+        url: 'https://www.dropbox.com/s/4lftuz5y5i0ld1z/wagmi.png?raw=1',
         width: 1200,
         height: 630,
         alt: 'Preview of the website',
