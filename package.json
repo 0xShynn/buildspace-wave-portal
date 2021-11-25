@@ -14,7 +14,7 @@
     "@chakra-ui/react": "^1.6.7",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
-    "@fontsource/work-sans": "^4.5.2",
+    "@fontsource/quicksand": "^4.5.1",
     "@hookform/resolvers": "^2.8.3",
     "@lottiefiles/lottie-player": "^1.4.5",
     "ethers": "^5.5.1",

@@ -303,10 +303,10 @@ export default function Home() {
             >
               <Nenderoidos />
             </Box>
-            <Heading fontFamily="body" mb="4">
+            <Heading fontFamily="heading" mb="4" fontWeight="600">
               Hello world! ✨
             </Heading>
-            <Text fontWeight="bold" mb={{ base: 6, md: 8 }} maxW="600px">
+            <Text mb={{ base: 6, md: 8 }} maxW="600px">
               I&apos;m{' '}
               <Link
                 href="https://twitter.com/anhek_"
@@ -321,8 +321,8 @@ export default function Home() {
               >
                 <Icon as={IoLogoTwitter} boxSize="16px" mb="1" mr="0.5" />
                 Antonin
-              </Link>
-              , a front-end developer who recently started his Web3 journey.
+              </Link>{' '}
+              a front-end developer who recently started his Web3 journey.
               {!currentAccount
                 ? ` Connect your wallet on the Ethereum Rinkeby network and send me a
               message 🤗 wagmi`
@@ -352,7 +352,6 @@ export default function Home() {
               <>
                 <Text
                   fontSize="15px"
-                  fontWeight="medium"
                   textTransform="capitalize"
                   mb="2"
                   px="1"

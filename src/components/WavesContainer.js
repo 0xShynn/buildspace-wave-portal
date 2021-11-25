@@ -39,7 +39,7 @@ const WavesContainer = ({ data, currentAccount }) => {
             </Box>
 
             <Box bg={selected ? 'pink.50' : 'white'} p={{ base: 3, md: 5 }}>
-              <Text fontWeight="medium">{wave.message}</Text>
+              <Text>{wave.message}</Text>
             </Box>
           </Box>
         )

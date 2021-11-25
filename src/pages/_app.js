@@ -4,7 +4,8 @@ import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
 import overrides from '../theme/index'
 
-import '@fontsource/work-sans'
+import '@fontsource/quicksand/600.css'
+import '@fontsource/quicksand/700.css'
 
 function MyApp({ Component, pageProps }) {
   return (

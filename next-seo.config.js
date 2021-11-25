@@ -50,7 +50,7 @@ export const SEO = {
     {
       name: 'theme-color',
       // Edit the full background color (android)
-      content: '#ffffff',
+      content: '#151C2D',
     },
   ],
   openGraph: {
