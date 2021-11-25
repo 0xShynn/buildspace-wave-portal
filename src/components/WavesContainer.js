@@ -5,7 +5,7 @@ const WavesContainer = ({ data, currentAccount }) => {
   const sortedData = data.sort((a, b) => b.timestamp - a.timestamp)
 
   return (
-    <VStack mt="16" spacing="8">
+    <VStack mt="16" spacing="6">
       <Heading fontFamily="body" color="white" textAlign="center">
         Thank you 💛
       </Heading>

@@ -4,8 +4,7 @@ import { DefaultSeo } from 'next-seo'
 import SEO from '../../next-seo.config'
 import overrides from '../theme/index'
 
-import '@fontsource/yellowtail'
-import '@fontsource/rubik'
+import '@fontsource/work-sans'
 
 function MyApp({ Component, pageProps }) {
   return (

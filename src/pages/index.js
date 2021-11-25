@@ -29,7 +29,7 @@ export default function Home() {
   const [miningState, setMiningState] = useState(null)
   const [allWaves, setAllWaves] = useState([])
 
-  const contractAddress = '0x376a669aB91BE0Df88E11486f1afD008a42918e9'
+  const contractAddress = '0xaA839187288B19Ea0c3f1EAeACf958838e8cB217'
   const contractABI = abi.abi
 
   const toast = useToast()
@@ -131,7 +131,7 @@ export default function Home() {
       if (error.code === 'CALL_EXCEPTION') {
         setError({
           code: 'Transaction Failed',
-          message: 'You need to wait 15mn before sending another wave.',
+          message: 'Sorry, you need to wait 5mn before sending another wave.',
         })
       } else {
         setError({ code: error.code, message: error.message })
@@ -271,26 +271,26 @@ export default function Home() {
         w="full"
         maxW="740px"
         mx="auto"
-        mt="10"
       >
-        <Flex textAlign="center" align="center" direction="column" rounded="xl">
+        <Flex textAlign="center" align="center" direction="column">
           <lottie-player
             ref={ref}
             autoplay
             loop
             mode="normal"
             src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
-            style={{ width: '320px', height: '320px' }}
+            style={{ width: '100%', height: '320px' }}
           />
+
           <Flex
             bg="white"
             rounded="xl"
             p={{ base: 6, md: 12 }}
-            mt="8"
             color="blue.900"
             direction="column"
             align="center"
             pos="relative"
+            mt="4"
           >
             <Box
               w={{ base: '100px', md: '120px' }}
@@ -310,8 +310,10 @@ export default function Home() {
                 Antonin
               </Link>
               , a front-end developer who recently started his Web3 journey.
-              Connect your wallet on the Ethereum Rinkeby Network and send me a
-              message 🤗 wagmi
+              {!currentAccount
+                ? ` Connect your wallet on the Ethereum Rinkeby network and send me a
+              message 🤗 wagmi`
+                : ` Send me a message 🤗 wagmi`}
             </Text>
 
             {networkName !== 'rinkeby' && networkName !== null && (
@@ -334,7 +336,22 @@ export default function Home() {
             )}
 
             {currentAccount && networkName === 'rinkeby' && !isLoading && (
-              <Form onWave={wave} miningState={miningState} />
+              <>
+                <Text
+                  bg="blue.100"
+                  fontSize="15px"
+                  fontWeight="medium"
+                  textTransform="capitalize"
+                  mb="2"
+                  px="1"
+                  rounded="md"
+                  textColor="blue.700"
+                  wordBreak="break-all"
+                >
+                  Connected account: {currentAccount}
+                </Text>
+                <Form onWave={wave} miningState={miningState} />
+              </>
             )}
           </Flex>
         </Flex>
