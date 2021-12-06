@@ -276,7 +276,7 @@ export default function Home() {
         mx="auto"
       >
         <Flex textAlign="center" align="center" direction="column">
-          <Box>
+          <Box w="300px" h="300px">
             <lottie-player
               ref={ref}
               autoplay
