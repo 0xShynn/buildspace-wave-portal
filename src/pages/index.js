@@ -42,6 +42,7 @@ export default function Home() {
         description: error.message,
         position: 'top-right',
         status: 'error',
+        variant: 'subtle',
         duration: 5000,
         isClosable: true,
       })
@@ -79,7 +80,7 @@ export default function Home() {
       const { ethereum } = window
 
       if (!ethereum) {
-        alert('Get MetaMask!')
+        alert('Please use MetaMask.')
         return
       }
 
@@ -361,7 +362,7 @@ export default function Home() {
                 >
                   Connected account: {currentAccount}
                 </Text>
-                <Form onWave={wave} miningState={miningState} />
+                <Form onWave={wave} />
               </>
             )}
           </Flex>

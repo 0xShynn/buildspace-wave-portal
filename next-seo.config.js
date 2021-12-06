@@ -26,6 +26,18 @@ export const SEO = {
       sizes: '32x32',
     },
     {
+      rel: 'icon',
+      href: 'favicons/android-chrome-192x192.png',
+      type: 'image/png',
+      sizes: '192x192',
+    },
+    {
+      rel: 'icon',
+      href: 'favicons/android-chrome-256x256.png',
+      type: 'image/png',
+      sizes: '256x256',
+    },
+    {
       rel: 'apple-touch-icon',
       href: 'favicons/apple-touch-icon.png',
       sizes: '180x180',
@@ -39,6 +51,10 @@ export const SEO = {
       href: 'favicons/safari-pinned-tab.svg',
       // Edit the touch bar background color
       color: '#D53F8C',
+    },
+    {
+      rel: 'shortcut icon',
+      href: 'favicons/android-chrome-256x256.png',
     },
   ],
   additionalMetaTags: [

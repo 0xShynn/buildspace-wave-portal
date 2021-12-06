@@ -6,10 +6,11 @@ import {
   FormControl,
   FormErrorMessage,
   Textarea,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
-const Form = ({ onWave, miningState }) => {
+const Form = ({ onWave }) => {
   const [formIsSent, setFormIsSent] = useState(false)
   const {
     handleSubmit,
@@ -17,6 +18,8 @@ const Form = ({ onWave, miningState }) => {
     reset,
     formState: { errors, isSubmitting },
   } = useForm()
+
+  const toast = useToast()
 
   async function onSubmit(values) {
     // return new Promise((resolve, reject) => {
@@ -32,6 +35,15 @@ const Form = ({ onWave, miningState }) => {
     await onWave(values.message)
       .then(() => {
         setFormIsSent(false)
+        toast({
+          title: 'Thank you!',
+          description: 'Your message has been successfully added :)',
+          status: 'success',
+          duration: 5000,
+          position: 'top-right',
+          variant: 'subtle',
+          isClosable: true,
+        })
         reset()
       })
       .catch((error) => {
