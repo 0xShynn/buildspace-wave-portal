@@ -276,14 +276,15 @@ export default function Home() {
         mx="auto"
       >
         <Flex textAlign="center" align="center" direction="column">
-          <lottie-player
-            ref={ref}
-            autoplay
-            loop
-            mode="normal"
-            src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
-            style={{ width: '100%', height: '320px' }}
-          />
+          <Box w="full" h="320px">
+            <lottie-player
+              ref={ref}
+              autoplay
+              loop
+              mode="normal"
+              src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
+            />
+          </Box>
 
           <Flex
             bg="white"
