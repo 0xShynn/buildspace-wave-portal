@@ -276,13 +276,14 @@ export default function Home() {
         mx="auto"
       >
         <Flex textAlign="center" align="center" direction="column">
-          <Box w="full" h="320px">
+          <Box>
             <lottie-player
               ref={ref}
               autoplay
               loop
               mode="normal"
               src="https://assets5.lottiefiles.com/packages/lf20_jm7mv1ib.json"
+              style={{ width: '300px', height: '300px' }}
             />
           </Box>
 
